@@ -26,7 +26,7 @@ create_tables()
 @app.websocket('/ws')
 async def ws():
     websocket_ = websocket._get_current_object()
-    print('WebSocket connection opened')  # Debugging line
+    print('WebSocket connection opened')
     await on_connect(websocket_)
 
 if __name__ == '__main__':

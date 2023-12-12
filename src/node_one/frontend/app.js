@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sharedPersonName = document.getElementById('shared-person-name');
 
     const socket = new WebSocket('ws://localhost:8070');
-    // Connect to the WebSocket server
 
     socket.onopen = (event) => {
         console.log('WebSocket connected:', event);
@@ -14,13 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const personName = personNameInput.value;
 
-        // Send the person's name to the server
         socket.send(JSON.stringify({ person_name: personName }));
     });
 
-    socket.onmessage = (event) => {
-        // Handle messages received from the server
-        const data = JSON.parse(event.data);
+    socket.onmessage = (event) => {        const data = JSON.parse(event.data);
         if (data.person_names) {
             sharedPersonName.textContent = data.person_names.join(', ');
         }

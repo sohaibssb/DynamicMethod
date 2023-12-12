@@ -4,12 +4,10 @@ import websockets
 from websockets.exceptions import ConnectionClosed
 from blueprints.models.node1_model import Node1Model
 
-# Initialize a G-Set for person names
 person_names = set()
 
 async def on_connect(websocket):
     try:
-        # Handle new WebSocket connections
         while True:
             data = await websocket.receive() 
             data = json.loads(data)
