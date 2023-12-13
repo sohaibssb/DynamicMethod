@@ -2,13 +2,12 @@ import json
 import asyncio
 import websockets
 from websockets.exceptions import ConnectionClosed
-from blueprints.models.node1_model import Node1Model
+from blueprints.models.node2_model import Node2Model
 
 person_names = set()
 
 async def on_connect(websocket):
     try:
-        print('WebSocket connection opened')
         while True:
             data = await websocket.receive() 
             data = json.loads(data)
@@ -17,7 +16,7 @@ async def on_connect(websocket):
                 person_name = data['person_name']
                 person_names.add(person_name)
 
-                Node1Model.create(person_name=person_name)
+                Node2Model.create(person_name=person_name)
 
             data_to_send = list(person_names)
             await websocket.send(json.dumps({
